@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import authRoute from  './routes/authRoute.js'
 import hotelsRoute from "./routes/hotelsRoute.js";
 import userRoute from "./routes/userRoute.js";
-import roomRoute from "./routes/roomRoute.js"
+import roomRoute from "./routes/roomRoute.js";
+import cookieParser from 'cookie-parser';
 
 
 
@@ -25,13 +26,17 @@ mongoose.connection.on("disconnected", () => {
     connect()
     console.log("MongoDB disconnected!")   
 })
+
+
+app.use(cookieParser())
 app.use(express.json())
+
 app.use('/api/auth', authRoute);
-app.use('/api/hotel', hotelsRoute);
 app.use('/api/user', userRoute);
+app.use('/api/hotel', hotelsRoute);
 app.use('/api/room',roomRoute);
 
-app.use(express.json())
+
 
 app.use((err,req,res,next) => {
     const errorStatus = err.Status || 500;
