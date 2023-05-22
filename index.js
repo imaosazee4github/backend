@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 
 
 
+
 const app = express();
 dotenv.config();
 
@@ -26,7 +27,6 @@ mongoose.connection.on("disconnected", () => {
     connect()
     console.log("MongoDB disconnected!")   
 })
-
 
 app.use(cookieParser())
 app.use(express.json())
